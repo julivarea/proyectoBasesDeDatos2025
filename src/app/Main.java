@@ -29,7 +29,7 @@ public class Main {
                     gestor.listarDonantesYAportes();
                     break;
                 case 4:
-                    gestor.mostrarAportesMensualesPorPrograma();
+                    gestor.mostrarTotalAportesPorProgama();
                     break;
                 case 5:
                     gestor.mostrarDonantesConMasDeDosProgramas();
