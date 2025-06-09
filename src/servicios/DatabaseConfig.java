@@ -9,11 +9,20 @@ import java.sql.SQLException;
  */
 public class DatabaseConfig {
     // Configuración de la base de datos
-    private static final String URL = "jdbc:mysql://localhost:3306/ciudad_ninos";
+    private static final String URL = "jdbc:mysql://localhost:3306/Donaciones";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "2002";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     
+    public static void main(String[] args) {
+        try {
+            Connection conn = getConnection();
+            System.out.println("¡Conexión exitosa!");
+            closeConnection(conn);
+        } catch (SQLException e) {
+            System.err.println("Error de conexión: " + e.getMessage());
+        }
+    }
     // Método para conectarse a la base de datos
     public static Connection getConnection() throws SQLException {
         try {
