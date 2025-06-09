@@ -5,7 +5,8 @@ USE Donaciones;
 -- Tabla Persona (necesaria para tener DNI unico)
 CREATE TABLE Padrino (
     dni CHAR(8) PRIMARY KEY NOT NULL,
-    nombreYApellido VARCHAR(100) NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
     direccion VARCHAR(200),
     codigoPostal VARCHAR(10),
     email VARCHAR(100),
@@ -73,7 +74,7 @@ CREATE TABLE Aporta (
     dni CHAR(8),
     nombrePrograma VARCHAR(100),
     monto DECIMAL(10,2) NOT NULL CHECK (monto > 0),
-    frecuencia VARCHAR(50) NOT NULL,
+    frecuencia ENUM('Mensual','Semestral') NOT NULL,
     idMP INTEGER,
     CONSTRAINT pk_aporta PRIMARY KEY (dni, nombrePrograma),
     CONSTRAINT fk_aporta_donante FOREIGN KEY (dni) REFERENCES Donante(dni)
@@ -87,7 +88,8 @@ CREATE TABLE Aporta (
 CREATE TABLE AuditoriaEliminacionDonante (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
     dni CHAR(8),
-    nombreYApellido VARCHAR(100),
+    nombre VARCHAR(50),
+    apellido VARCHAR(50),
     fechaEliminacion DATETIME DEFAULT CURRENT_TIMESTAMP,
     usuarioDB VARCHAR(100)
 );
@@ -97,14 +99,17 @@ CREATE TRIGGER trigger_eliminacion_donante
 AFTER DELETE ON Donante
 FOR EACH ROW
 BEGIN
-	DECLARE nombre VARCHAR(100);
-    SELECT nombreYApellido INTO nombre FROM Padrino WHERE dni=OLD.dni;
-    INSERT INTO AuditoriaEliminacionDonante (dni, nombreYApellido, fechaEliminacion, usuarioDB)
+	DECLARE nombre_donante VARCHAR(50);
+    DECLARE apellido_donante VARCHAR(50);
+
+    SELECT nombre, apellido INTO nombre_donante, apellido_donante FROM Padrino WHERE dni=OLD.dni;
+    INSERT INTO AuditoriaEliminacionDonante (dni, nombre, apellido, fechaEliminacion, usuarioDB)
     VALUES (
         OLD.dni,
-        nombre,
+        nombre_donante,
+        apellido_donante,
         NOW(),
-        CURRENT_USER()
+        USER()
     );
     DELETE FROM Padrino WHERE dni=OLD.dni;
 END;
