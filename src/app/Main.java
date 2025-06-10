@@ -13,7 +13,7 @@ public class Main {
             mostrarMenu();
             System.out.println("Seleccione una opción: ");
             while (!scanner.hasNextInt()) {
-                System.out.println("Entrada inválida. Ingrese un número del 0 al 6: ");
+                System.out.println("Entrada inválida. Ingrese un número del 0 al 8: ");
                 scanner.next();
             }
             
@@ -42,6 +42,12 @@ public class Main {
                 case 6:
                     gestor.mostrarDonantesAportesMensualesConMediosPago();
                     break;
+                case 7:
+                    gestor.mostrarTodosPadrinos();
+                    break;
+                case 8:
+                    gestor.mostrarAuditoriaEliminacionDonantes();
+                    break;
                 default:
                     System.out.println("Opción no válida. Ingrese un número del 0 al 6: ");
                     break;
@@ -62,6 +68,8 @@ public class Main {
         System.out.println("4- Mostrar los aportes mensuales para cada programa");
         System.out.println("5- Mostrar los donantes que aportan a más de dos programas");
         System.out.println("6- Mostrar los donantes con aportes mensuales y los medios de pago utilizados");
+        System.out.println("7- Mostrar los padrinos");
+        System.out.println("8- Ver registro de auditoría de eliminación de donantes");
         System.out.println("0- Salir");
         System.out.println("=============================================================================");
     }

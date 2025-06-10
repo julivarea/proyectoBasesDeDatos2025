@@ -31,11 +31,11 @@ public class GestorPadrinos {
         try {
             String dni;
             do {
-                System.out.println("Ingrese el dni del padrino (8 digitos)");
-                dni = scanner.nextLine();
-                // Revisamos que tenga 8 caracteres que sean solo digitos (usando regex)
-                if (dni.length() != 8 || !dni.matches("\\d{8}")) { 
-                    System.out.println("El DNI debe tener 8 dígitos. Intente nuevamente.");
+                dni = solicitarStringConLongitud("Ingrese el dni del padrino (8 digitos)", 8, 8, "El DNI");
+                
+                // Validar que contenga solo dígitos
+                if (!dni.matches("\\d{8}")) { 
+                    System.out.println("El DNI debe contener solo dígitos. Intente nuevamente.");
                     dni = null;
                     continue;
                 }
@@ -53,98 +53,35 @@ public class GestorPadrinos {
                 checkStmt.close();
             } while (dni == null);
 
-            String nombre;
-            do {
-                System.out.println("Ingrese el nombre del padrino (máximo 50 caracteres)");
-                nombre = scanner.nextLine();
-                if (nombre.length() == 0 || nombre.length() > 50) {
-                    System.out.println("El nombre debe tener entre 1 y 50 caracteres. Intente nuevamente.");
-                    nombre = null;
-                }
-            } while (nombre == null);
-
-            String apellido;
-            do {
-                System.out.println("Ingrese el apellido del padrino (máximo 50 caracteres)");
-                apellido = scanner.nextLine();
-                if (apellido.length() == 0 || apellido.length() > 50) {
-                    System.out.println("El apellido debe tener entre 1 y 50 caracteres. Intente nuevamente.");
-                    apellido = null;
-                }
-            } while (apellido == null);
-
-            String direccion;
-            do {
-                System.out.println("Ingrese la dirección del padrino (máximo 200 caracteres)");
-                direccion = scanner.nextLine();
-                if (direccion.length() == 0 || direccion.length() > 200) {
-                    System.out.println("La dirección debe tener entre 1 y 200 caracteres. Intente nuevamente.");
-                    direccion = null;
-                }
-            } while (direccion == null);
-
-            String codigoPostal;
-            do {
-                System.out.println("Ingrese el código postal (máximo 10 caracteres)");
-                codigoPostal = scanner.nextLine();
-                if (codigoPostal.length() == 0 || codigoPostal.length() > 10) {
-                    System.out.println("El código postal debe tener entre 1 y 10 caracteres. Intente nuevamente.");
-                    codigoPostal = null;
-                }
-            } while (codigoPostal == null);
-
-            String email;
-            do {
-                System.out.println("Ingrese el email del padrino (máximo 100 caracteres)");
-                email = scanner.nextLine();
-                if (email.length() == 0 || email.length() > 100) {
-                    System.out.println("El email debe tener entre 1 y 100 caracteres. Intente nuevamente.");
-                    email = null;
-                }
-            } while (email == null);
-
-            String facebook;
-            do {
-                System.out.println("Ingrese el facebook del padrino (máximo 100 caracteres)");
-                facebook = scanner.nextLine();
-                if (facebook.length() == 0 || facebook.length() > 100) {
-                    System.out.println("El facebook debe tener entre 1 y 100 caracteres. Intente nuevamente.");
-                    facebook = null;
-                }
-            } while (facebook == null);
-
-            String telFijo;
-            do {
-                System.out.println("Ingrese el teléfono fijo (máximo 20 caracteres)");
-                telFijo = scanner.nextLine();
-                if (telFijo.length() == 0 || telFijo.length() > 20) {
-                    System.out.println("El teléfono debe tener entre 1 y 20 caracteres. Intente nuevamente.");
-                    telFijo = null;
-                }
-            } while (telFijo == null);
+            String nombre = solicitarStringConLongitud("Ingrese el nombre del padrino (máximo 50 caracteres)", 1, 50, "El nombre");
+            String apellido = solicitarStringConLongitud("Ingrese el apellido del padrino (máximo 50 caracteres)", 1, 50, "El apellido");
+            String direccion = solicitarStringConLongitud("Ingrese la dirección del padrino (máximo 200 caracteres)", 1, 200, "La dirección");
+            String codigoPostal = solicitarStringConLongitud("Ingrese el código postal (máximo 10 caracteres)", 1, 10, "El código postal");
+            String email = solicitarStringConLongitud("Ingrese el email del padrino (máximo 100 caracteres)", 1, 100, "El email");
+            String facebook = solicitarStringConLongitud("Ingrese el facebook del padrino (máximo 100 caracteres)", 1, 100, "El facebook");
+            String telFijo = solicitarStringConLongitud("Ingrese el teléfono fijo (máximo 20 caracteres)", 1, 20, "El teléfono fijo");
 
             String telCelular;
             do {
-                System.out.println("Ingrese el teléfono celular (máximo 20 caracteres)");
-                telCelular = scanner.nextLine();
-                if (telCelular.length() == 0 || telCelular.length() > 20) {
-                    System.out.println("El teléfono celular debe tener entre 1 y 20 caracteres. Intente nuevamente.");
-                    telCelular = null;
-                    continue; // Vuelvo a pedir
-                }
-                // Revisamos que sea distinto al fijo
+                telCelular = solicitarStringConLongitud("Ingrese el teléfono celular (máximo 20 caracteres)", 1, 20, "El teléfono celular");
+                
+                // Validar que sea distinto al fijo
                 if (telCelular.equals(telFijo)) {
                     System.out.println("El teléfono celular debe ser distinto al teléfono fijo. Intente nuevamente.");
                     telCelular = null;
                 }
             } while (telCelular == null);
 
-            // Usamos LocalDate y DateTimeFormatter para asegurarnos de que sea una fecha valida en formato AAAA-MM-DD
+            // Validación de fecha de nacimiento
             String fechaNacimientoStr = null;
             LocalDate fechaNacimiento = null;
             while (fechaNacimiento == null) {
                 System.out.println("Ingrese la fecha de nacimiento del padrino (AAAA-MM-DD)");
-                fechaNacimientoStr = scanner.nextLine();
+                fechaNacimientoStr = scanner.nextLine().trim();
+                if (fechaNacimientoStr.isEmpty()) {
+                    System.out.println("La fecha no puede estar vacía. Intente nuevamente.");
+                    continue;
+                }
                 try {
                     fechaNacimiento = LocalDate.parse(fechaNacimientoStr, DateTimeFormatter.ISO_LOCAL_DATE);
                 } catch (DateTimeParseException e) {
@@ -152,9 +89,9 @@ public class GestorPadrinos {
                 }
             }
 
-            // Formato general del insert a Padrino con placeholders que seteamos en el prepared statement
+            // Insertar en base de datos
             String sql = "INSERT INTO Padrino (dni, nombre, apellido, direccion, codigoPostal, email, facebook, telFijo, telCelular, fechaNacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-           
+        
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, dni);
             pstmt.setString(2, nombre);
@@ -239,15 +176,16 @@ public class GestorPadrinos {
             """;
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
-            System.out.printf("%-12s %-15s %-15s %10s %-10s%n", "DNI", "Nombre", "Apellido", "Monto", "Frecuencia");
+            System.out.printf("%-12s %-15s %-15s %-20s %10s %-10s%n", "DNI", "Nombre", "Apellido", "Programa", "Monto", "Frecuencia");
             while (rs.next()) {
                 String dni = rs.getString("dni");
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
+                String programa = rs.getString("nombrePrograma");
                 double monto = rs.getDouble("monto");
                 String frecuencia = rs.getString("frecuencia");
 
-                System.out.printf("%-12s %-15s %-15s %10.2f %-10s%n", dni, nombre, apellido, monto, frecuencia);
+                System.out.printf("%-12s %-15s %-15s %-20s %10.2f %-10s%n", dni, nombre, apellido, programa, monto, frecuencia);
             }
         } catch (SQLException e) {
             System.err.println("Error al mostrar los donantes y aportes: " + e.getMessage());
@@ -392,6 +330,92 @@ public class GestorPadrinos {
         } catch (SQLException e) {
             System.err.println("Error al mostrar donantes con aportes mensuales y medios de pago: " + e.getMessage());
         }
+    }
+
+    /* ============================= CONSULTAS VARIAS (no pedidas en la consigna) ============================= */
+
+    // No se pide, pero sirve para poder ver si insertar padrino funciona bien
+    public void mostrarTodosPadrinos() {
+        System.out.println("\n+-+-+-+-+-+-+-+-+-+ PADRINOS +-+-+-+-+-+-+-+-+-+");
+        try {
+            String sql = "SELECT * FROM Padrino ORDER BY apellido, nombre";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            System.out.printf("%-10s %-15s %-15s %-25s %-12s %-25s %-20s %-15s %-15s %-15s%n",
+                "DNI", "Nombre", "Apellido", "Dirección", "Cod. Postal", "Email", "Facebook", "Tel. Fijo", "Tel. Celular", "F. Nacimiento");
+            
+            while (rs.next()) {
+                System.out.printf("%-10s %-15s %-15s %-25s %-12s %-25s %-20s %-15s %-15s %-15s%n",
+                    rs.getString("dni"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("direccion"),
+                    rs.getString("codigoPostal"),
+                    rs.getString("email"),
+                    rs.getString("facebook"),
+                    rs.getString("telFijo"),
+                    rs.getString("telCelular"),
+                    rs.getDate("fechaNacimiento")
+                );
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            System.err.println("Error al mostrar los padrinos: " + e.getMessage());
+        }
+    }
+
+    // Para poder ver si se eliminaron correctamente los donantes
+    public void mostrarAuditoriaEliminacionDonantes() {
+        System.out.println("\n+-+-+-+-+-+-+-+-+-+ AUDITORÍA ELIMINACIÓN DONANTES +-+-+-+-+-+-+-+-+-+");
+        try {
+            String sql = "SELECT * FROM AuditoriaEliminacionDonante ORDER BY fechaEliminacion DESC";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            System.out.printf("%-5s %-10s %-15s %-15s %-20s %-20s%n",
+                "ID", "DNI", "Nombre", "Apellido", "Fecha Eliminación", "Usuario DB");
+            
+            while (rs.next()) {
+                System.out.printf("%-5d %-10s %-15s %-15s %-20s %-20s%n",
+                    rs.getInt("id"),
+                    rs.getString("dni"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getTimestamp("fechaEliminacion"),
+                    rs.getString("usuarioDB")
+                );
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            System.err.println("Error al mostrar la auditoría de eliminación de donantes: " + e.getMessage());
+        }
+    }
+
+    /* ============================= AUXILIARES ============================= */
+
+    // Se encarga de pedir un string, mostrando el mensaje dado, y asegurandose de que el string ingresado respete el rango de longitud.
+    private String solicitarStringConLongitud(String mensaje, int minLength, int maxLength, String nombreCampo) {
+        String input;
+        do {
+            System.out.println(mensaje);
+            input = scanner.nextLine().trim();
+            
+            if (input.isEmpty()) {
+                System.out.println(nombreCampo + " no puede estar vacío. Intente nuevamente.");
+                input = null;
+            } else if (input.length() < minLength || input.length() > maxLength) {
+                if (minLength == maxLength) {
+                    System.out.println(nombreCampo + " debe tener exactamente " + maxLength + " caracteres. Intente nuevamente.");
+                } else {
+                    System.out.println(nombreCampo + " debe tener entre " + minLength + " y " + maxLength + " caracteres. Intente nuevamente.");
+                }
+                input = null;
+            }
+        } while (input == null);
+        return input;
     }
 
     public void cerrarScanner() {
