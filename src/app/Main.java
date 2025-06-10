@@ -49,7 +49,7 @@ public class Main {
                     gestor.mostrarAuditoriaEliminacionDonantes();
                     break;
                 default:
-                    System.out.println("Opción no válida. Ingrese un número del 0 al 6: ");
+                    System.out.println("Opción no válida. Ingrese un número del 0 al 8: ");
                     break;
             }
 
