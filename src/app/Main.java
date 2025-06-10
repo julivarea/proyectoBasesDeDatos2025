@@ -29,7 +29,7 @@ public class Main {
                     gestor.listarDonantesYAportes();
                     break;
                 case 4:
-                    gestor.mostrarAportesMensualesPorPrograma();
+                    gestor.mostrarTotalAportesPorProgama();
                     break;
                 case 5:
                     gestor.mostrarDonantesConMasDeDosProgramas();
@@ -58,7 +58,5 @@ public class Main {
         System.out.println("6- Mostrar los donantes con aportes mensuales y los medios de pago utilizados");
         System.out.println("0- Salir");
         System.out.println("=============================================================================");
-
-        // ETC...
     }
 }

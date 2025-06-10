@@ -1,8 +1,10 @@
 -- Crear la base de datos
-CREATE DATABASE IF NOT EXISTS Donaciones;
+DROP DATABASE IF EXISTS Donaciones;
+CREATE DATABASE Donaciones;
 USE Donaciones;
 
 -- Tabla Persona (necesaria para tener DNI unico)
+DROP TABLE IF EXISTS Padrino;
 CREATE TABLE Padrino (
     dni CHAR(8) PRIMARY KEY NOT NULL,
     nombre VARCHAR(50) NOT NULL,
@@ -17,6 +19,7 @@ CREATE TABLE Padrino (
 );
 
 -- Tabla Donante
+DROP TABLE IF EXISTS Donante;
 CREATE TABLE Donante (
 	dni CHAR(8) PRIMARY KEY,
     cuit VARCHAR(13) UNIQUE NOT NULL,
@@ -25,6 +28,7 @@ CREATE TABLE Donante (
 );
 
 -- Tabla Contacto
+DROP TABLE IF EXISTS Contacto;
 CREATE TABLE Contacto (
     dni CHAR(8) PRIMARY KEY,
     fechaPrimerContacto DATE NOT NULL,
@@ -36,18 +40,22 @@ CREATE TABLE Contacto (
 );
 
 -- Tabla Programa
+DROP TABLE IF EXISTS Programa;
 CREATE TABLE Programa (
     nombre VARCHAR(100) PRIMARY KEY,
     descripcion TEXT NOT NULL
 );
 
 -- Tabla MedioDePago
+DROP TABLE IF EXISTS MedioDePago;
 CREATE TABLE MedioDePago (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    nombreTitular VARCHAR(100) NOT NULL
+    nombreTitular VARCHAR(50) NOT NULL,
+    apellidoTitular VARCHAR(50) NOT NULL
 );
 
 -- Tabla TarjetaDeCredito
+DROP TABLE IF EXISTS TarjetaDeCredito;
 CREATE TABLE TarjetaDeCredito (
     id INTEGER PRIMARY KEY,
     numero VARCHAR(20) NOT NULL UNIQUE,
@@ -58,6 +66,7 @@ CREATE TABLE TarjetaDeCredito (
 );
 
 -- Tabla DebitoTransferencia
+DROP TABLE IF EXISTS DebitoTransferencia;
 CREATE TABLE DebitoTransferencia (
     id INTEGER PRIMARY KEY,
     CBU CHAR(22) UNIQUE,
@@ -70,6 +79,7 @@ CREATE TABLE DebitoTransferencia (
 );
 
 -- Tabla Aporta
+DROP TABLE IF EXISTS Aporta;
 CREATE TABLE Aporta (
     dni CHAR(8),
     nombrePrograma VARCHAR(100),
@@ -85,6 +95,7 @@ CREATE TABLE Aporta (
         ON DELETE SET NULL ON UPDATE CASCADE
 );
 
+DROP TABLE IF EXISTS AuditoriaEliminacionDonante;
 CREATE TABLE AuditoriaEliminacionDonante (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
     dni CHAR(8),
@@ -94,6 +105,7 @@ CREATE TABLE AuditoriaEliminacionDonante (
     usuarioDB VARCHAR(100)
 );
 
+DROP TRIGGER IF EXISTS trigger_eliminacion_donante;
 DELIMITER //
 CREATE TRIGGER trigger_eliminacion_donante
 AFTER DELETE ON Donante
@@ -116,6 +128,7 @@ END;
 //
 DELIMITER ;
 
+DROP TRIGGER IF EXISTS trigger_eliminacion_contacto;
 DELIMITER //
 CREATE TRIGGER trigger_eliminacion_contacto
 AFTER DELETE ON Contacto

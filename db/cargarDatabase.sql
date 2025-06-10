@@ -38,14 +38,14 @@ INSERT INTO Programa (nombre, descripcion) VALUES
 ('Salud', 'Atención médica');
 
 -- Medios de pago
-INSERT INTO MedioDePago (nombreTitular) VALUES
-('Pepe McPepe'),
-('Fulano Fulanez'),
-('Laura González'),
-('Carlos Ramírez'),
-('Lucía Martínez'),
-('Ana Pérez'),
-('Diego López');
+INSERT INTO MedioDePago (nombreTitular, apellidoTitular) VALUES
+('Pepe', 'McPepe'),
+('Fulano', 'Fulanez'),
+('Laura', 'González'),
+('Carlos', 'Ramírez'),
+('Lucía', 'Martínez'),
+('Ana', 'Pérez'),
+('Diego', 'López');
 
 -- Tarjetas de crédito
 INSERT INTO TarjetaDeCredito (id, numero, nombreTarjeta, fechaVencimiento) VALUES
@@ -58,19 +58,18 @@ INSERT INTO TarjetaDeCredito (id, numero, nombreTarjeta, fechaVencimiento) VALUE
 INSERT INTO DebitoTransferencia (id, CBU, numeroCuenta, nombreBanco, sucursalBanco, tipoCuenta) VALUES
 (2, '1234567890123456789012', '1234567890', 'Banco Nación', 'Sucursal Rio Cuarto', 'Caja de Ahorro'),
 (4, '2345678901234567890123', '9876543210', 'Banco Galicia', 'Sucursal Belgrano', 'Cuenta Corriente'),
-(6, '3456789012345678901234', '1231231234', 'Banco Provincia', 'Sucursal La Plata', 'Caja de Ahorro'),
-(8, '4567890123456789012345', '3213213210', 'Banco Santander', 'Sucursal Palermo', 'Cuenta Corriente');
+(6, '3456789012345678901234', '1231231234', 'Banco Provincia', 'Sucursal La Plata', 'Caja de Ahorro');
 
 -- Aportes
 INSERT INTO Aporta (dni, nombrePrograma, monto, frecuencia, idMP) VALUES
 ('12345678', 'Alimentación', 1000.00, 'Mensual', 1),
 ('12345678', 'Educación', 1300.00, 'Mensual', 1),
-('12345678', 'Salud', 1400.00, 'Trimestral', 1);
+('12345678', 'Salud', 1400.00, 'Semestral', 1),
 ('87654321', 'Educación', 1500.00, 'Semestral', 2),
 ('22223333', 'Salud', 2000.00, 'Mensual', 3),
 ('44445555', 'Alimentación', 1200.00, 'Semestral', 4),
 ('66667777', 'Educación', 900.00, 'Mensual', 5),
 ('88889999', 'Alimentación', 700.00, 'Mensual', 7),
-('99990000', 'Salud', 1800.00, 'Mensual', 8),
-('99990000', 'Educación', 1100.00, 'Semestral', 8),
-('99990000', 'Alimentación', 950.00, 'Mensual', 8);
+('99990000', 'Salud', 1800.00, 'Mensual', 6),
+('99990000', 'Educación', 1100.00, 'Semestral', 6),
+('99990000', 'Alimentación', 950.00, 'Mensual', 6);
