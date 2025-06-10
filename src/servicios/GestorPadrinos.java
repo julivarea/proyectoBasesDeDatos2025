@@ -200,10 +200,12 @@ public class GestorPadrinos {
     // ...existing code...
 
     public void mostrarTotalAportesPorProgama() {
-        System.out.println("+-+-+-+ TOTAL APORTES POR PROGRAMA +-+-+-+");
+        System.out.println("+-+-+-+ TOTAL APORTES MENSUALES POR PROGRAMA +-+-+-+\n");
         try {
-            String sql = "SELECT nombrePrograma, SUM(monto) AS totalAportado " +
-                         "FROM Aporta GROUP BY nombrePrograma";
+            String sql = "SELECT nombrePrograma, SUM(monto) AS totalMensual " +
+             "FROM Aporta " +
+             "WHERE frecuencia = 'Mensual' " +
+             "GROUP BY nombrePrograma";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
@@ -222,12 +224,14 @@ public class GestorPadrinos {
     }
 
     public void mostrarDonantesConMasDeDosProgramas() {
-        System.out.println("+-+-+-+ DONANTES CON MÁS DE DOS PROGRAMAS +-+-+-+");
+        System.out.println("+-+-+-+ DONANTES CON MÁS DE DOS PROGRAMAS +-+-+-+\n");
         try {
-            String sql = "SELECT d.dni, d.cuit, d.ocupacion, COUNT(a.nombrePrograma) AS cantidadProgramas " +
-                         "FROM Donante d JOIN Aporta a ON d.dni = a.dni " +
-                         "GROUP BY d.dni, d.cuit, d.ocupacion " +
-                         "HAVING COUNT(a.nombrePrograma) > 2";
+            String sql = "SELECT d.dni, d.cuit, d.ocupacion, p.nombre, p.apellido, COUNT(a.nombrePrograma) AS cantidadProgramas " +
+             "FROM Donante d " +
+             "JOIN Padrino p ON d.dni = p.dni " +
+             "JOIN Aporta a ON d.dni = a.dni " +
+             "GROUP BY d.dni, d.cuit, d.ocupacion, p.nombre, p.apellido " +
+             "HAVING COUNT(a.nombrePrograma) > 2";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
@@ -248,13 +252,14 @@ public class GestorPadrinos {
     }
 
     public void mostrarDonantesAportesMensualesConMediosPago() {
-        System.out.println("+-+-+-+ DONANTES CON APORTES MENSUALES Y MEDIOS DE PAGO +-+-+-+");
+        System.out.println("+-+-+-+ DONANTES CON APORTES MENSUALES Y MEDIOS DE PAGO +-+-+-+\n");
         try {
-            String sql = "SELECT d.dni, d.cuit, d.ocupacion, a.nombrePrograma, a.monto, m.nombreTitular " +
-                         "FROM Donante d " +
-                         "JOIN Aporta a ON d.dni = a.dni " +
-                         "LEFT JOIN MedioDePago m ON a.idMP = m.id " +
-                         "WHERE a.frecuencia = 'Mensual'";
+            String sql = "SELECT d.dni, p.nombre, p.apellido, d.cuit, d.ocupacion, a.nombrePrograma, a.monto, m.id AS idMedioPago, m.nombreTitular " +
+             "FROM Donante d " +
+             "JOIN Padrino p ON d.dni = p.dni " +
+             "JOIN Aporta a ON d.dni = a.dni " +
+             "LEFT JOIN MedioDePago m ON a.idMP = m.id " +
+             "WHERE a.frecuencia = 'Mensual'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
