@@ -230,11 +230,13 @@ public class GestorPadrinos {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
-            System.out.printf("%-10s %-15s %-15s %-20s%n", "DNI", "CUIT", "Ocupación", "Cantidad Programas");
+            System.out.printf("%-10s %-15s %-15s %-15s %-15s %-20s%n", "DNI", "CUIT", "Nombre", "Apellido", "Ocupación", "Cantidad Programas");
             while (rs.next()) {
-                System.out.printf("%-10s %-15s %-15s %-20d%n",
+                System.out.printf("%-10s %-15s %-15s %-15s %-15s %-20d%n",
                     rs.getString("dni"),
                     rs.getString("cuit"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
                     rs.getString("ocupacion"),
                     rs.getInt("cantidadProgramas")
                 );
