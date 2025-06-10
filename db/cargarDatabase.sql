@@ -69,7 +69,7 @@ INSERT INTO Aporta (dni, nombrePrograma, monto, frecuencia, idMP) VALUES
 ('22223333', 'Salud', 2000.00, 'Mensual', 3),
 ('44445555', 'Alimentación', 1200.00, 'Semestral', 4),
 ('66667777', 'Educación', 900.00, 'Mensual', 5),
-('88889999', 'Alimentación', 700.00, 'Mensual', 7),
-('99990000', 'Salud', 1800.00, 'Mensual', 6),
-('99990000', 'Educación', 1100.00, 'Semestral', 6),
-('99990000', 'Alimentación', 950.00, 'Mensual', 6);
+('88889999', 'Alimentación', 700.00, 'Mensual', 6),
+('99990000', 'Salud', 1800.00, 'Mensual', 7),
+('99990000', 'Educación', 1100.00, 'Semestral', 7),
+('99990000', 'Alimentación', 950.00, 'Mensual', 7);
