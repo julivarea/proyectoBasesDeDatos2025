@@ -15,6 +15,11 @@ Este proyecto implementa un sistema de base de datos para gestionar el "Programa
 
 El sistema permite administrar donantes, contactos, programas de ayuda, aportes y medios de pago.
 
+Para usarlo, compilar y ejecutar referenciando el archivo en la carpeta /lib
+java -cp "lib/*;src" src/app/Main.java
+o
+java -cp "lib/*:src" src/app/Main.java
+
 ## Tareas del proyecto:
 
 ### Base de Datos
