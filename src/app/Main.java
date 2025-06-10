@@ -11,9 +11,9 @@ public class Main {
 
         do {
             mostrarMenu();
-            System.out.println("Seleccione una opción: ");
+            System.out.println("Seleccione una opcion: ");
             while (!scanner.hasNextInt()) {
-                System.out.println("Entrada inválida. Ingrese un número del 0 al 8: ");
+                System.out.println("Entrada invalida. Ingrese un numero del 0 al 8: ");
                 scanner.next();
             }
             
@@ -49,7 +49,7 @@ public class Main {
                     gestor.mostrarAuditoriaEliminacionDonantes();
                     break;
                 default:
-                    System.out.println("Opción no válida. Ingrese un número del 0 al 8: ");
+                    System.out.println("Opcion no valida. Ingrese un numero del 0 al 8: ");
                     break;
             }
 
@@ -66,10 +66,10 @@ public class Main {
         System.out.println("2- Eliminar donante");
         System.out.println("3- Listar donantes y aportes");
         System.out.println("4- Mostrar los aportes mensuales para cada programa");
-        System.out.println("5- Mostrar los donantes que aportan a más de dos programas");
+        System.out.println("5- Mostrar los donantes que aportan a mas de dos programas");
         System.out.println("6- Mostrar los donantes con aportes mensuales y los medios de pago utilizados");
         System.out.println("7- Mostrar los padrinos");
-        System.out.println("8- Ver registro de auditoría de eliminación de donantes");
+        System.out.println("8- Ver registro de auditoria de eliminacion de donantes");
         System.out.println("0- Salir");
         System.out.println("=============================================================================");
     }

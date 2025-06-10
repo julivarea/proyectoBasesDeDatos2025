@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
- * Esta clase se encarga de establecer la conexión con la base de datos al iniciar la App, y provee los metodos basicos de gestión.
+ * Esta clase se encarga de establecer la conexion con la base de datos al iniciar la App, y provee los metodos basicos de gestion.
  */
 public class GestorPadrinos {
     Scanner scanner;
@@ -19,7 +19,7 @@ public class GestorPadrinos {
             this.conn = DatabaseConfig.getConnection();
         }
         catch (SQLException e) {
-            System.err.println("Error al establecer la conexión con la base de datos: " + e.getMessage());
+            System.err.println("Error al establecer la conexion con la base de datos: " + e.getMessage());
             this.conn = null;
         }
     }
@@ -33,9 +33,9 @@ public class GestorPadrinos {
             do {
                 dni = solicitarStringConLongitud("Ingrese el dni del padrino (8 digitos)", 8, 8, "El DNI");
                 
-                // Validar que contenga solo dígitos
+                // Validar que contenga solo digitos
                 if (!dni.matches("\\d{8}")) { 
-                    System.out.println("El DNI debe contener solo dígitos. Intente nuevamente.");
+                    System.out.println("El DNI debe contener solo digitos. Intente nuevamente.");
                     dni = null;
                     continue;
                 }
@@ -53,39 +53,39 @@ public class GestorPadrinos {
                 checkStmt.close();
             } while (dni == null);
 
-            String nombre = solicitarStringConLongitud("Ingrese el nombre del padrino (máximo 50 caracteres)", 1, 50, "El nombre");
-            String apellido = solicitarStringConLongitud("Ingrese el apellido del padrino (máximo 50 caracteres)", 1, 50, "El apellido");
-            String direccion = solicitarStringConLongitud("Ingrese la dirección del padrino (máximo 200 caracteres)", 1, 200, "La dirección");
-            String codigoPostal = solicitarStringConLongitud("Ingrese el código postal (máximo 10 caracteres)", 1, 10, "El código postal");
-            String email = solicitarStringConLongitud("Ingrese el email del padrino (máximo 100 caracteres)", 1, 100, "El email");
-            String facebook = solicitarStringConLongitud("Ingrese el facebook del padrino (máximo 100 caracteres)", 1, 100, "El facebook");
-            String telFijo = solicitarStringConLongitud("Ingrese el teléfono fijo (máximo 20 caracteres)", 1, 20, "El teléfono fijo");
+            String nombre = solicitarStringConLongitud("Ingrese el nombre del padrino (maximo 50 caracteres)", 1, 50, "El nombre");
+            String apellido = solicitarStringConLongitud("Ingrese el apellido del padrino (maximo 50 caracteres)", 1, 50, "El apellido");
+            String direccion = solicitarStringConLongitud("Ingrese la direccion del padrino (maximo 200 caracteres)", 1, 200, "La direccion");
+            String codigoPostal = solicitarStringConLongitud("Ingrese el codigo postal (maximo 10 caracteres)", 1, 10, "El codigo postal");
+            String email = solicitarStringConLongitud("Ingrese el email del padrino (maximo 100 caracteres)", 1, 100, "El email");
+            String facebook = solicitarStringConLongitud("Ingrese el facebook del padrino (maximo 100 caracteres)", 1, 100, "El facebook");
+            String telFijo = solicitarStringConLongitud("Ingrese el telefono fijo (maximo 20 caracteres)", 1, 20, "El telefono fijo");
 
             String telCelular;
             do {
-                telCelular = solicitarStringConLongitud("Ingrese el teléfono celular (máximo 20 caracteres)", 1, 20, "El teléfono celular");
+                telCelular = solicitarStringConLongitud("Ingrese el telefono celular (maximo 20 caracteres)", 1, 20, "El telefono celular");
                 
                 // Validar que sea distinto al fijo
                 if (telCelular.equals(telFijo)) {
-                    System.out.println("El teléfono celular debe ser distinto al teléfono fijo. Intente nuevamente.");
+                    System.out.println("El telefono celular debe ser distinto al telefono fijo. Intente nuevamente.");
                     telCelular = null;
                 }
             } while (telCelular == null);
 
-            // Validación de fecha de nacimiento
+            // Validacion de fecha de nacimiento
             String fechaNacimientoStr = null;
             LocalDate fechaNacimiento = null;
             while (fechaNacimiento == null) {
                 System.out.println("Ingrese la fecha de nacimiento del padrino (AAAA-MM-DD)");
                 fechaNacimientoStr = scanner.nextLine().trim();
                 if (fechaNacimientoStr.isEmpty()) {
-                    System.out.println("La fecha no puede estar vacía. Intente nuevamente.");
+                    System.out.println("La fecha no puede estar vacia. Intente nuevamente.");
                     continue;
                 }
                 try {
                     fechaNacimiento = LocalDate.parse(fechaNacimientoStr, DateTimeFormatter.ISO_LOCAL_DATE);
                 } catch (DateTimeParseException e) {
-                    System.out.println("Fecha inválida. Por favor, ingrese la fecha en el formato correcto (AAAA-MM-DD).");
+                    System.out.println("Fecha invalida. Por favor, ingrese la fecha en el formato correcto (AAAA-MM-DD).");
                 }
             }
 
@@ -118,16 +118,16 @@ public class GestorPadrinos {
         try {
             String dni;
             while (true) {
-                System.out.println("Ingrese el dni del donante a eliminar (8 digitos). Ingrese -1 para volver al menú");
+                System.out.println("Ingrese el dni del donante a eliminar (8 digitos). Ingrese -1 para volver al menu");
                 dni = scanner.nextLine();
 
                 if (dni.equals("-1")) {
-                    System.out.println("Volviendo al menú...");
+                    System.out.println("Volviendo al menu...");
                     return;
                 }
 
                 if (dni.length() != 8 || !dni.matches("\\d{8}")) { // Revisamos que tenga 8 caracteres que sean solo digitos (usando regex)
-                    System.out.println("El DNI debe tener 8 dígitos. Intente nuevamente.");
+                    System.out.println("El DNI debe tener 8 digitos. Intente nuevamente.");
                     dni = null;
                     continue;
                 }
@@ -217,7 +217,7 @@ public class GestorPadrinos {
     }
 
     public void mostrarDonantesConMasDeDosProgramas() {
-        System.out.println("\n+-+-+-+-+-+-+-+-+-+ DONANTES CON MÁS DE DOS PROGRAMAS +-+-+-+-+-+-+-+-+-+\n");
+        System.out.println("\n+-+-+-+-+-+-+-+-+-+ DONANTES CON MAS DE DOS PROGRAMAS +-+-+-+-+-+-+-+-+-+\n");
         try {
             String sql = "SELECT d.dni, d.cuit, d.ocupacion, p.nombre, p.apellido, COUNT(a.nombrePrograma) AS cantidadProgramas " +
              "FROM Donante d " +
@@ -228,7 +228,7 @@ public class GestorPadrinos {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
-            System.out.printf("%-10s %-15s %-15s %-15s %-15s %-20s%n", "DNI", "CUIT", "Nombre", "Apellido", "Ocupación", "Cantidad Programas");
+            System.out.printf("%-10s %-15s %-15s %-15s %-15s %-20s%n", "DNI", "CUIT", "Nombre", "Apellido", "Ocupacion", "Cantidad Programas");
             while (rs.next()) {
                 System.out.printf("%-10s %-15s %-15s %-15s %-15s %-20d%n",
                     rs.getString("dni"),
@@ -242,7 +242,7 @@ public class GestorPadrinos {
             rs.close();
             st.close();
         } catch (SQLException e) {
-            System.err.println("Error al mostrar donantes con más de dos programas: " + e.getMessage());
+            System.err.println("Error al mostrar donantes con mas de dos programas: " + e.getMessage());
         }
     }
 
@@ -254,7 +254,7 @@ public class GestorPadrinos {
             // Dado que los datos de las tarjetas de credito y de los debitos/transferencias son distintos, mostramos separados los aportes de cada tipo
             
             // Tarjetas
-            System.out.println("\n>> DONANTES QUE USAN TARJETA DE CRÉDITO <<\n");
+            System.out.println("\n>> DONANTES QUE USAN TARJETA DE CRESDITO <<\n");
             String sqlTarjetas = 
                 "SELECT d.dni, d.cuit, p.nombre, p.apellido, d.ocupacion, " +
                 "a.nombrePrograma, a.monto, a.frecuencia, " +
@@ -268,7 +268,7 @@ public class GestorPadrinos {
                 "WHERE a.frecuencia = 'Mensual'";
             ResultSet rs = st.executeQuery(sqlTarjetas);
             System.out.printf("%-10s %-15s %-10s %-10s %-15s %-20s %-10s %-12s %-25s %-15s %-20s %-10s%n",
-                             "DNI", "CUIT", "Nombre", "Apellido", "Ocupación", "Programa", "Monto", "Frecuencia", 
+                             "DNI", "CUIT", "Nombre", "Apellido", "Ocupacion", "Programa", "Monto", "Frecuencia", 
                             "Titular", "Tarjeta", "Nro Tarjeta", "Vencimiento");
             while (rs.next()) {
                 String titular = rs.getString("nombreTitular") + " " + rs.getString("apellidoTitular");
@@ -290,7 +290,7 @@ public class GestorPadrinos {
             rs.close();
 
             // Debito / Transferencia
-            System.out.println("\n>> DONANTES QUE USAN DÉBITO O TRANSFERENCIA <<\n");
+            System.out.println("\n>> DONANTES QUE USAN DESBITO O TRANSFERENCIA <<\n");
             String sqlDebito = 
                 "SELECT d.dni, d.cuit, p.nombre, p.apellido, d.ocupacion, " +
                 "a.nombrePrograma, a.monto, a.frecuencia, " + 
@@ -304,7 +304,7 @@ public class GestorPadrinos {
                 "WHERE a.frecuencia = 'Mensual'";
             rs = st.executeQuery(sqlDebito);
             System.out.printf("%-10s %-15s %-10s %-10s %-15s %-20s %-10s %-12s %-25s %-15s %-25s %-15s%n",
-                "DNI", "CUIT", "Nombre", "Apellido", "Ocupación", "Programa", "Monto", "Frecuencia", 
+                "DNI", "CUIT", "Nombre", "Apellido", "Ocupacion", "Programa", "Monto", "Frecuencia", 
                 "Titular", "Banco", "CBU", "Cuenta");
 
             while (rs.next()) {
@@ -343,7 +343,7 @@ public class GestorPadrinos {
             ResultSet rs = st.executeQuery(sql);
             
             System.out.printf("%-10s %-15s %-15s %-25s %-12s %-25s %-20s %-15s %-15s %-15s%n",
-                "DNI", "Nombre", "Apellido", "Dirección", "Cod. Postal", "Email", "Facebook", "Tel. Fijo", "Tel. Celular", "F. Nacimiento");
+                "DNI", "Nombre", "Apellido", "Direccion", "Cod. Postal", "Email", "Facebook", "Tel. Fijo", "Tel. Celular", "F. Nacimiento");
             
             while (rs.next()) {
                 System.out.printf("%-10s %-15s %-15s %-25s %-12s %-25s %-20s %-15s %-15s %-15s%n",
@@ -368,14 +368,14 @@ public class GestorPadrinos {
 
     // Para poder ver si se eliminaron correctamente los donantes
     public void mostrarAuditoriaEliminacionDonantes() {
-        System.out.println("\n+-+-+-+-+-+-+-+-+-+ AUDITORÍA ELIMINACIÓN DONANTES +-+-+-+-+-+-+-+-+-+");
+        System.out.println("\n+-+-+-+-+-+-+-+-+-+ AUDITORÍA ELIMINACION DONANTES +-+-+-+-+-+-+-+-+-+");
         try {
             String sql = "SELECT * FROM AuditoriaEliminacionDonante ORDER BY fechaEliminacion DESC";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             
             System.out.printf("%-5s %-10s %-15s %-15s %-20s %-20s%n",
-                "ID", "DNI", "Nombre", "Apellido", "Fecha Eliminación", "Usuario DB");
+                "ID", "DNI", "Nombre", "Apellido", "Fecha Eliminacion", "Usuario DB");
             
             while (rs.next()) {
                 System.out.printf("%-5d %-10s %-15s %-15s %-20s %-20s%n",
@@ -390,7 +390,7 @@ public class GestorPadrinos {
             rs.close();
             st.close();
         } catch (SQLException e) {
-            System.err.println("Error al mostrar la auditoría de eliminación de donantes: " + e.getMessage());
+            System.err.println("Error al mostrar la auditoria de eliminacion de donantes: " + e.getMessage());
         }
     }
 
@@ -404,7 +404,7 @@ public class GestorPadrinos {
             input = scanner.nextLine().trim();
             
             if (input.isEmpty()) {
-                System.out.println(nombreCampo + " no puede estar vacío. Intente nuevamente.");
+                System.out.println(nombreCampo + " no puede estar vacio. Intente nuevamente.");
                 input = null;
             } else if (input.length() < minLength || input.length() > maxLength) {
                 if (minLength == maxLength) {
