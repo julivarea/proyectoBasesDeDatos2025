@@ -12,9 +12,14 @@ public class Main {
         do {
             mostrarMenu();
             System.out.println("Seleccione una opción: ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida. Ingrese un número del 0 al 6: ");
+                scanner.next();
+            }
+            
             opcion = scanner.nextInt();
             scanner.nextLine();
-
+            
             switch (opcion) {
                 case 0:
                     System.out.println("Saliendo del sistema...");
@@ -38,12 +43,13 @@ public class Main {
                     gestor.mostrarDonantesAportesMensualesConMediosPago();
                     break;
                 default:
-                    System.out.println("Opción no válida.");
+                    System.out.println("Opción no válida. Ingrese un número del 0 al 6: ");
                     break;
             }
 
         } while (opcion != 0);
 
+        gestor.cerrarScanner();
         scanner.close();
     }
 
