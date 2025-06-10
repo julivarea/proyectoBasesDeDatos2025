@@ -27,13 +27,14 @@ public class GestorPadrinos {
     /* ============================= FUNCIONES DEL EJERCICIO 5 ============================= */
 
     public void insertarPadrino() {
-        System.out.println("+-+-+-+ INSERTAR PADRINO +-+-+-+");
+        System.out.println("\n+-+-+-+-+-+-+-+-+-+ INSERTAR PADRINO +-+-+-+-+-+-+-+-+-+");
         try {
             String dni;
             do {
                 System.out.println("Ingrese el dni del padrino (8 digitos)");
                 dni = scanner.nextLine();
-                if (dni.length() != 8 || !dni.matches("\\d{8}")) { // Revisamos que tenga 8 caracteres que sean solo digitos (usando regex)
+                // Revisamos que tenga 8 caracteres que sean solo digitos (usando regex)
+                if (dni.length() != 8 || !dni.matches("\\d{8}")) { 
                     System.out.println("El DNI debe tener 8 dígitos. Intente nuevamente.");
                     dni = null;
                     continue;
@@ -52,41 +53,93 @@ public class GestorPadrinos {
                 checkStmt.close();
             } while (dni == null);
 
-            /*
-            String cuit;
+            String nombre;
             do {
-                System.out.println("Ingrese el cuit del padrino");
-                cuit = scanner.nextLine();
-                if (cuit.length() != 11) {
-                    System.out.println("El CUIT debe tener 11 dígitos (solo numeros). Intente nuevamente.");
+                System.out.println("Ingrese el nombre del padrino (máximo 50 caracteres)");
+                nombre = scanner.nextLine();
+                if (nombre.length() == 0 || nombre.length() > 50) {
+                    System.out.println("El nombre debe tener entre 1 y 50 caracteres. Intente nuevamente.");
+                    nombre = null;
                 }
-            } while (cuit.length() != 11);
-            */
+            } while (nombre == null);
 
-            System.out.println("Ingrese el nombre del padrino");
-            String nombre = scanner.nextLine();
+            String apellido;
+            do {
+                System.out.println("Ingrese el apellido del padrino (máximo 50 caracteres)");
+                apellido = scanner.nextLine();
+                if (apellido.length() == 0 || apellido.length() > 50) {
+                    System.out.println("El apellido debe tener entre 1 y 50 caracteres. Intente nuevamente.");
+                    apellido = null;
+                }
+            } while (apellido == null);
 
-            System.out.println("Ingrese el apellido del padrino");
-            String apellido = scanner.nextLine();
+            String direccion;
+            do {
+                System.out.println("Ingrese la dirección del padrino (máximo 200 caracteres)");
+                direccion = scanner.nextLine();
+                if (direccion.length() == 0 || direccion.length() > 200) {
+                    System.out.println("La dirección debe tener entre 1 y 200 caracteres. Intente nuevamente.");
+                    direccion = null;
+                }
+            } while (direccion == null);
 
-            System.out.println("Ingrese la direccion del padrino");
-            String direccion = scanner.nextLine();
+            String codigoPostal;
+            do {
+                System.out.println("Ingrese el código postal (máximo 10 caracteres)");
+                codigoPostal = scanner.nextLine();
+                if (codigoPostal.length() == 0 || codigoPostal.length() > 10) {
+                    System.out.println("El código postal debe tener entre 1 y 10 caracteres. Intente nuevamente.");
+                    codigoPostal = null;
+                }
+            } while (codigoPostal == null);
 
-            System.out.println("Ingrese el codigo postal del padrino");
-            String codigoPostal = scanner.nextLine();
+            String email;
+            do {
+                System.out.println("Ingrese el email del padrino (máximo 100 caracteres)");
+                email = scanner.nextLine();
+                if (email.length() == 0 || email.length() > 100) {
+                    System.out.println("El email debe tener entre 1 y 100 caracteres. Intente nuevamente.");
+                    email = null;
+                }
+            } while (email == null);
 
-            System.out.println("Ingrese el email del padrino");
-            String email = scanner.nextLine();
+            String facebook;
+            do {
+                System.out.println("Ingrese el facebook del padrino (máximo 100 caracteres)");
+                facebook = scanner.nextLine();
+                if (facebook.length() == 0 || facebook.length() > 100) {
+                    System.out.println("El facebook debe tener entre 1 y 100 caracteres. Intente nuevamente.");
+                    facebook = null;
+                }
+            } while (facebook == null);
 
-            System.out.println("Ingrese el facebook del padrino");
-            String facebook = scanner.nextLine();
+            String telFijo;
+            do {
+                System.out.println("Ingrese el teléfono fijo (máximo 20 caracteres)");
+                telFijo = scanner.nextLine();
+                if (telFijo.length() == 0 || telFijo.length() > 20) {
+                    System.out.println("El teléfono debe tener entre 1 y 20 caracteres. Intente nuevamente.");
+                    telFijo = null;
+                }
+            } while (telFijo == null);
 
-            System.out.println("Ingrese el telefono fijo del padrino");
-            String telFijo = scanner.nextLine();
+            String telCelular;
+            do {
+                System.out.println("Ingrese el teléfono celular (máximo 20 caracteres)");
+                telCelular = scanner.nextLine();
+                if (telCelular.length() == 0 || telCelular.length() > 20) {
+                    System.out.println("El teléfono celular debe tener entre 1 y 20 caracteres. Intente nuevamente.");
+                    telCelular = null;
+                    continue; // Vuelvo a pedir
+                }
+                // Revisamos que sea distinto al fijo
+                if (telCelular.equals(telFijo)) {
+                    System.out.println("El teléfono celular debe ser distinto al teléfono fijo. Intente nuevamente.");
+                    telCelular = null;
+                }
+            } while (telCelular == null);
 
-            System.out.println("Ingrese el telefono celular del padrino");
-            String telCelular = scanner.nextLine();
-
+            // Usamos LocalDate y DateTimeFormatter para asegurarnos de que sea una fecha valida en formato AAAA-MM-DD
             String fechaNacimientoStr = null;
             LocalDate fechaNacimiento = null;
             while (fechaNacimiento == null) {
@@ -99,14 +152,9 @@ public class GestorPadrinos {
                 }
             }
 
-            /*
-            System.out.println("Ingrese la ocupacion del padrino");
-            String ocupacion = scanner.nextLine();
-            */
-
+            // Formato general del insert a Padrino con placeholders que seteamos en el prepared statement
             String sql = "INSERT INTO Padrino (dni, nombre, apellido, direccion, codigoPostal, email, facebook, telFijo, telCelular, fechaNacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
            
-            // Insertar el padrino en la base de datos
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, dni);
             pstmt.setString(2, nombre);
@@ -118,21 +166,29 @@ public class GestorPadrinos {
             pstmt.setString(8, telFijo);
             pstmt.setString(9, telCelular);
             pstmt.setDate(10, java.sql.Date.valueOf(fechaNacimiento));
-            
-            pstmt.executeUpdate();
+            int filasAfectadas = pstmt.executeUpdate();
+
             System.out.println("Padrino insertado correctamente.");
+            System.out.println("Filas afectadas: " + filasAfectadas);
+
         } catch (SQLException e) {
             System.err.println("Error al insertar padrino: " + e.getMessage());
         }
     }
 
     public void eliminarDonante() {
-        System.out.println("+-+-+-+ ELIMINAR DONANTE +-+-+-+");
+        System.out.println("\n+-+-+-+-+-+-+-+-+-+ ELIMINAR DONANTE +-+-+-+-+-+-+-+-+-+");
         try {
             String dni;
-            do {
-                System.out.println("Ingrese el dni del donante a eliminar (8 digitos)");
+            while (true) {
+                System.out.println("Ingrese el dni del donante a eliminar (8 digitos). Ingrese -1 para volver al menú");
                 dni = scanner.nextLine();
+
+                if (dni.equals("-1")) {
+                    System.out.println("Volviendo al menú...");
+                    return;
+                }
+
                 if (dni.length() != 8 || !dni.matches("\\d{8}")) { // Revisamos que tenga 8 caracteres que sean solo digitos (usando regex)
                     System.out.println("El DNI debe tener 8 dígitos. Intente nuevamente.");
                     dni = null;
@@ -149,7 +205,7 @@ public class GestorPadrinos {
                     System.out.println("No hay un donante registrado con ese DNI.");
                     rs.close();
                     checkStmt.close();
-                    return; // salimos sin borrar
+                    continue; // volvemos a pedir
                 }
                 rs.close();
                 checkStmt.close();
@@ -158,17 +214,19 @@ public class GestorPadrinos {
                 String deleteSQL = "DELETE FROM Donante WHERE dni= ?";
                 PreparedStatement deleteStmt = conn.prepareStatement(deleteSQL);
                 deleteStmt.setString(1, dni);
-                deleteStmt.executeUpdate();
+                int filasAfectadas = deleteStmt.executeUpdate();
                 deleteStmt.close();
 
-            } while (dni == null);
+                System.out.println("Filas afectadas: " + filasAfectadas);
+                break;
+            }
         } catch (SQLException e) {
             System.err.println("Error al eliminar donante: " + e.getMessage());
         }
     }
 
     public void listarDonantesYAportes() {
-        System.out.println("+-+-+-+ LISTAR DONANTES Y APORTES +-+-+-+");
+        System.out.println("\n+-+-+-+-+-+-+-+-+-+ LISTAR DONANTES Y APORTES +-+-+-+-+-+-+-+-+-+");
         try {
             String sql = """
                             SELECT 
@@ -197,10 +255,9 @@ public class GestorPadrinos {
     }
 
     /* ============================= CONSULTAS DEL EJERCICIO 6 ============================= */
-    // ...existing code...
 
     public void mostrarTotalAportesPorProgama() {
-        System.out.println("+-+-+-+ TOTAL APORTES MENSUALES POR PROGRAMA +-+-+-+\n");
+        System.out.println("\n+-+-+-+-+-+-+-+-+-+ TOTAL APORTES MENSUALES POR PROGRAMA +-+-+-+-+-+-+-+-+-+\n");
         try {
             String sql = "SELECT nombrePrograma, SUM(monto) AS totalMensual " +
              "FROM Aporta " +
@@ -213,7 +270,7 @@ public class GestorPadrinos {
             while (rs.next()) {
                 System.out.printf("%-20s %-15.2f%n",
                     rs.getString("nombrePrograma"),
-                    rs.getDouble("totalAportado")
+                    rs.getDouble("totalMensual")
                 );
             }
             rs.close();
@@ -224,7 +281,7 @@ public class GestorPadrinos {
     }
 
     public void mostrarDonantesConMasDeDosProgramas() {
-        System.out.println("+-+-+-+ DONANTES CON MÁS DE DOS PROGRAMAS +-+-+-+\n");
+        System.out.println("\n+-+-+-+-+-+-+-+-+-+ DONANTES CON MÁS DE DOS PROGRAMAS +-+-+-+-+-+-+-+-+-+\n");
         try {
             String sql = "SELECT d.dni, d.cuit, d.ocupacion, p.nombre, p.apellido, COUNT(a.nombrePrograma) AS cantidadProgramas " +
              "FROM Donante d " +
@@ -252,33 +309,93 @@ public class GestorPadrinos {
     }
 
     public void mostrarDonantesAportesMensualesConMediosPago() {
-        System.out.println("+-+-+-+ DONANTES CON APORTES MENSUALES Y MEDIOS DE PAGO +-+-+-+\n");
+        System.out.println("\n+-+-+-+-+-+-+-+-+-+ DONANTES CON APORTES MENSUALES Y MEDIOS DE PAGO +-+-+-+-+-+-+-+-+-+\n");
         try {
-            String sql = "SELECT d.dni, p.nombre, p.apellido, d.cuit, d.ocupacion, a.nombrePrograma, a.monto, m.id AS idMedioPago, m.nombreTitular " +
-             "FROM Donante d " +
-             "JOIN Padrino p ON d.dni = p.dni " +
-             "JOIN Aporta a ON d.dni = a.dni " +
-             "LEFT JOIN MedioDePago m ON a.idMP = m.id " +
-             "WHERE a.frecuencia = 'Mensual'";
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
 
-            System.out.printf("%-10s %-15s %-15s %-20s %-10s %-20s%n", "DNI", "CUIT", "Ocupación", "Programa", "Monto", "Medio de Pago");
+            // Dado que los datos de las tarjetas de credito y de los debitos/transferencias son distintos, mostramos separados los aportes de cada tipo
+            
+            // Tarjetas
+            System.out.println("\n>> DONANTES QUE USAN TARJETA DE CRÉDITO <<\n");
+            String sqlTarjetas = 
+                "SELECT d.dni, d.cuit, p.nombre, p.apellido, d.ocupacion, " +
+                "a.nombrePrograma, a.monto, a.frecuencia, " +
+                "m.nombreTitular, m.apellidoTitular, " +
+                "tc.nombreTarjeta, tc.numero, tc.fechaVencimiento " +
+                "FROM Donante d " +
+                "JOIN Padrino p ON d.dni = p.dni " +
+                "JOIN Aporta a ON d.dni = a.dni " +
+                "JOIN MedioDePago m ON a.idMP = m.id " +
+                "JOIN TarjetaDeCredito tc ON m.id = tc.id " +
+                "WHERE a.frecuencia = 'Mensual'";
+            ResultSet rs = st.executeQuery(sqlTarjetas);
+            System.out.printf("%-10s %-15s %-10s %-10s %-15s %-20s %-10s %-12s %-25s %-15s %-20s %-10s%n",
+                             "DNI", "CUIT", "Nombre", "Apellido", "Ocupación", "Programa", "Monto", "Frecuencia", 
+                            "Titular", "Tarjeta", "Nro Tarjeta", "Vencimiento");
             while (rs.next()) {
-                System.out.printf("%-10s %-15s %-15s %-20s %-10.2f %-20s%n",
+                String titular = rs.getString("nombreTitular") + " " + rs.getString("apellidoTitular");
+                System.out.printf("%-10s %-15s %-10s %-10s %-15s %-20s %-10.2f %-12s %-25s %-15s %-20s %-10s%n",
                     rs.getString("dni"),
                     rs.getString("cuit"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
                     rs.getString("ocupacion"),
                     rs.getString("nombrePrograma"),
                     rs.getDouble("monto"),
-                    rs.getString("nombreTitular")
+                    rs.getString("frecuencia"),
+                    titular,
+                    rs.getString("nombreTarjeta"),
+                    rs.getString("numero"),
+                    rs.getString("fechaVencimiento")
                 );
             }
             rs.close();
+
+            // Debito / Transferencia
+            System.out.println("\n>> DONANTES QUE USAN DÉBITO O TRANSFERENCIA <<\n");
+            String sqlDebito = 
+                "SELECT d.dni, d.cuit, p.nombre, p.apellido, d.ocupacion, " +
+                "a.nombrePrograma, a.monto, a.frecuencia, " + 
+                "m.nombreTitular, m.apellidoTitular, " +
+                "dt.nombreBanco, dt.sucursalBanco, dt.CBU, dt.tipoCuenta " +
+                "FROM Donante d " +
+                "JOIN Padrino p ON d.dni = p.dni " +
+                "JOIN Aporta a ON d.dni = a.dni " +
+                "JOIN MedioDePago m ON a.idMP = m.id " +
+                "JOIN DebitoTransferencia dt ON m.id = dt.id " +
+                "WHERE a.frecuencia = 'Mensual'";
+            rs = st.executeQuery(sqlDebito);
+            System.out.printf("%-10s %-15s %-10s %-10s %-15s %-20s %-10s %-12s %-25s %-15s %-25s %-15s%n",
+                "DNI", "CUIT", "Nombre", "Apellido", "Ocupación", "Programa", "Monto", "Frecuencia", 
+                "Titular", "Banco", "CBU", "Cuenta");
+
+            while (rs.next()) {
+                String titularDebitoTransferencia = rs.getString("nombreTitular") + " " + rs.getString("apellidoTitular");
+                System.out.printf("%-10s %-15s %-10s %-10s %-15s %-20s %-10.2f %-12s %-25s %-15s %-25s %-15s%n",
+                    rs.getString("dni"),
+                    rs.getString("cuit"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("ocupacion"),
+                    rs.getString("nombrePrograma"),
+                    rs.getDouble("monto"),
+                    rs.getString("frecuencia"),
+                    titularDebitoTransferencia,
+                    rs.getString("nombreBanco"),
+                    rs.getString("CBU"),
+                    rs.getString("tipoCuenta")
+                );
+            }
+            rs.close();
+
             st.close();
         } catch (SQLException e) {
             System.err.println("Error al mostrar donantes con aportes mensuales y medios de pago: " + e.getMessage());
         }
+    }
+
+    public void cerrarScanner() {
+        scanner.close();
     }
 
 }
