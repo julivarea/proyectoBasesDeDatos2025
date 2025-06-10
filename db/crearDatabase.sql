@@ -9,13 +9,13 @@ CREATE TABLE Padrino (
     dni CHAR(8) PRIMARY KEY NOT NULL,
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
-    direccion VARCHAR(200),
-    codigoPostal VARCHAR(10),
-    email VARCHAR(100),
-    facebook VARCHAR(100),
-    telFijo VARCHAR(20),
-    telCelular VARCHAR(20),
-    fechaNacimiento DATE
+    direccion VARCHAR(200) NOT NULL,
+    codigoPostal VARCHAR(10) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    facebook VARCHAR(100) NOT NULL,
+    telFijo VARCHAR(20) NOT NULL,
+    telCelular VARCHAR(20) NOT NULL,
+    fechaNacimiento DATE NOT NULL
 );
 
 -- Tabla Donante
