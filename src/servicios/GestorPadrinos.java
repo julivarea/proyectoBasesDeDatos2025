@@ -163,34 +163,32 @@ public class GestorPadrinos {
     }
 
     public void listarDonantesYAportes() {
-        System.out.println("\n+-+-+-+-+-+-+-+-+-+ LISTAR DONANTES Y APORTES +-+-+-+-+-+-+-+-+-+");
-        try {
-            String sql = """
-                            SELECT 
-                                d.dni, p.nombre, p.apellido, 
-                                a.nombrePrograma, a.monto, a.frecuencia 
-                                FROM Donante d 
-                                JOIN Aporta a ON d.dni = a.dni 
-                                JOIN Padrino p ON d.dni = p.dni
-                                ORDER BY p.apellido, p.nombre
-            """;
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            ResultSet rs = pstmt.executeQuery();
-            System.out.printf("%-12s %-15s %-15s %-20s %10s %-10s%n", "DNI", "Nombre", "Apellido", "Programa", "Monto", "Frecuencia");
-            while (rs.next()) {
-                String dni = rs.getString("dni");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                String programa = rs.getString("nombrePrograma");
-                double monto = rs.getDouble("monto");
-                String frecuencia = rs.getString("frecuencia");
-
-                System.out.printf("%-12s %-15s %-15s %-20s %10.2f %-10s%n", dni, nombre, apellido, programa, monto, frecuencia);
-            }
-        } catch (SQLException e) {
-            System.err.println("Error al mostrar los donantes y aportes: " + e.getMessage());
+    System.out.println("\n+-+-+-+-+-+-+-+-+-+ LISTAR DONANTES Y APORTES +-+-+-+-+-+-+-+-+-+");
+    try {
+        String sql =
+            "SELECT " +
+            "    d.dni, p.nombre, p.apellido, " +
+            "    a.nombrePrograma, a.monto, a.frecuencia " +
+            "FROM Donante d " +
+            "JOIN Aporta a ON d.dni = a.dni " +
+            "JOIN Padrino p ON d.dni = p.dni " +
+            "ORDER BY p.apellido, p.nombre";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+        System.out.printf("%-12s %-15s %-15s %-20s %10s %-10s%n", "DNI", "Nombre", "Apellido", "Programa", "Monto", "Frecuencia");
+        while (rs.next()) {
+            String dni = rs.getString("dni");
+            String nombre = rs.getString("nombre");
+            String apellido = rs.getString("apellido");
+            String programa = rs.getString("nombrePrograma");
+            double monto = rs.getDouble("monto");
+            String frecuencia = rs.getString("frecuencia");
+            System.out.printf("%-12s %-15s %-15s %-20s %10.2f %-10s%n", dni, nombre, apellido, programa, monto, frecuencia);
         }
+    } catch (SQLException e) {
+        System.err.println("Error al mostrar los donantes y aportes: " + e.getMessage());
     }
+}
 
     /* ============================= CONSULTAS DEL EJERCICIO 6 ============================= */
 
